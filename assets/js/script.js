@@ -18,8 +18,21 @@ const showSeatBoxes = () => {
   document.querySelector('#seat').innerHTML = insertHTML;
 }
 
-const timer = setInterval(function () {
-  shuffleArray();
-  showSeatBoxes();
-  clearInterval(timer);
-}, 50);
+const soundPlay = function () {
+  const audioElement = new Audio();
+  audioElement.src = 'assets/audio/drum.mp3';
+  audioElement.play();
+
+  audioElement.addEventListener('ended', function () {
+    clearInterval(timer);
+  })
+}
+
+document.querySelector('#btn-start').addEventListener('click', function () {
+  timer = setInterval(function () {
+    shuffleArray();
+    showSeatBoxes();
+  }, 50);
+
+  soundPlay();
+});
